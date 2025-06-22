@@ -133,6 +133,17 @@ cd mobile && flutter run
 - ✅ Design futurista implementado
 - ✅ Documentação completa em português
 - ✅ Git configurado e versionado
+- ✅ Código enviado para GitHub
 - ✅ Pronto para testes no celular
 
 **🎊 PROJETO CONCLUÍDO COM SUCESSO! 🎊**
+
+## 📂 Repositório GitHub
+
+**🔗 URL**: https://github.com/rafaelgoesti/teste-devnology-ecommerce.git
+
+### 📝 **Último Commit**: 
+- **Hash**: `303a1d7`
+- **Título**: "Flutter mobile"
+- **Arquivos**: 140 arquivos alterados, 7866 linhas adicionadas
+- **Status**: ✅ **Enviado com sucesso**
