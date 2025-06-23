@@ -110,13 +110,33 @@ cd mobile && flutter run
 
 ## 🚀 Próximos Passos
 
-1. **Testar no celular físico** com Flutter
-2. **Fazer builds de produção**:
-   - `npm run build` para React
-   - `flutter build apk` para Android
-   - `flutter build ios` para iOS
-3. **Deploy em servidor**
-4. **Configurar domínio personalizado**
+1. **✅ Configurado para Railway** - Backend pronto para deploy
+2. **🔄 Deploy na Railway**:
+   - Acesse: https://railway.app
+   - Conecte com GitHub
+   - Selecione o repositório
+   - Escolha pasta `backend`
+   - Configure variáveis de ambiente
+3. **🔄 Atualizar frontend** com URL da API de produção
+4. **🔄 Redeploy do frontend** no Vercel
+5. **✅ Sistema 100% na nuvem!**
+
+## 📂 Arquivos de Deploy
+
+### **✅ Railway (Backend)**
+- `backend/railway.json` - Configuração da Railway
+- `backend/Procfile` - Comando de inicialização
+- `backend/env.example` - Variáveis de ambiente
+- `RAILWAY_DEPLOY.md` - Guia completo de deploy
+
+### **✅ Vercel (Frontend)**
+- `vercel.json` - Configuração do Vercel
+- `frontend/.env.example` - Variáveis do React
+- URL configurável via `REACT_APP_API_URL`
+
+### **✅ Flutter Mobile**
+- URL de produção configurável
+- Suporte para Railway em produção
 
 ---
 
