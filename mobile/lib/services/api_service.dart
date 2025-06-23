@@ -3,8 +3,16 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import '../models/models.dart';
 
-class ApiService {  // Para Flutter web usa localhost, para mobile usa o IP da máquina
+class ApiService {
+  // Configuração da URL da API
+  // Para produção, use a URL da Railway
+  // Para desenvolvimento local, use localhost ou IP local
   static String get baseUrl {
+    // URL de produção (Railway) - descomente para usar em produção
+    // const String productionUrl = 'https://seu-projeto.railway.app';
+    // return productionUrl;
+    
+    // URLs de desenvolvimento
     if (kIsWeb) {
       // Para Flutter Web
       return 'http://localhost:3001';

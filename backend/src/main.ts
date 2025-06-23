@@ -29,12 +29,14 @@ async function bootstrap() {
     .addTag('orders')
     .addTag('providers')
     .build();
-  
-  const document = SwaggerModule.createDocument(app, config);
+    const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
-  await app.listen(3001, '0.0.0.0');
-  console.log('🚀 Backend server running on http://localhost:3001');
-  console.log('🌐 Server accessible from network at http://192.168.1.155:3001');
-  console.log('📚 API Documentation available at http://localhost:3001/api/docs');
+  
+  // Use PORT from environment or default to 3001
+  const port = process.env.PORT || 3001;
+  await app.listen(port, '0.0.0.0');
+  
+  console.log(`🚀 Backend server running on port ${port}`);
+  console.log(`📚 API Documentation available at http://localhost:${port}/api/docs`);
 }
 bootstrap();
