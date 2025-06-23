@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 import { CartItem, Product } from '../types';
 
+// Helper function to ensure price is a number
+const getProductPrice = (price: any): number => {
+  return typeof price === 'number' ? price : parseFloat(price || 0);
+};
+
 interface CartState {
   items: CartItem[];
   total: number;
@@ -37,18 +42,15 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
           quantity: newItems[existingItemIndex].quantity + 1
         };
       } else {
-        newItems = [...state.items, { product: action.payload, quantity: 1 }];
-      }
+        newItems = [...state.items, { product: action.payload, quantity: 1 }];      }
 
-      const total = newItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+      const total = newItems.reduce((sum, item) => sum + (getProductPrice(item.product.price) * item.quantity), 0);
       const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
 
       return { items: newItems, total, itemCount };
-    }
-
-    case 'REMOVE_ITEM': {
+    }    case 'REMOVE_ITEM': {
       const newItems = state.items.filter(item => item.product.id !== action.payload);
-      const total = newItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+      const total = newItems.reduce((sum, item) => sum + (getProductPrice(item.product.price) * item.quantity), 0);
       const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
 
       return { items: newItems, total, itemCount };
@@ -58,10 +60,9 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       const newItems = state.items.map(item =>
         item.product.id === action.payload.productId
           ? { ...item, quantity: action.payload.quantity }
-          : item
-      ).filter(item => item.quantity > 0);
+          : item      ).filter(item => item.quantity > 0);
 
-      const total = newItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+      const total = newItems.reduce((sum, item) => sum + (getProductPrice(item.product.price) * item.quantity), 0);
       const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
 
       return { items: newItems, total, itemCount };

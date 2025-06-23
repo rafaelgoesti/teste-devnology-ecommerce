@@ -31,6 +31,7 @@ import { toast } from 'react-toastify';
 import { useCart } from '../context/CartContext';
 import { OrdersService } from '../services/orders';
 import { CreateOrderData } from '../types';
+import { getProductPrice } from '../utils/productUtils';
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ const CheckoutPage: React.FC = () => {
       items: items.map(item => ({
         product_id: item.product.id,
         quantity: item.quantity,
-        unit_price: item.product.price,
+        unit_price: getProductPrice(item.product.price),
         product_name: item.product.name,
         product_image: item.product.image,
       })),
@@ -292,7 +293,7 @@ const CheckoutPage: React.FC = () => {
                           </Typography>
                         </Box>
                         <Typography sx={{ color: '#00f5ff', fontFamily: 'Orbitron' }}>
-                          ${(item.product.price * item.quantity).toFixed(2)}
+                          ${(getProductPrice(item.product.price) * item.quantity).toFixed(2)}
                         </Typography>
                       </Box>
                     ))}

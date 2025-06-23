@@ -30,11 +30,11 @@ import { toast } from 'react-toastify';
 import { ProductsService } from '../services/products';
 import { useCart } from '../context/CartContext';
 import { Product, ProductFilters } from '../types';
+import { normalizeProduct } from '../utils/productUtils';
 
 const ProductsPage: React.FC = () => {
   const { addItem } = useCart();
-  const [filters, setFilters] = useState<ProductFilters>({});
-  const { data: products = [], isLoading, error } = useQuery({
+  const [filters, setFilters] = useState<ProductFilters>({});  const { data: rawProducts = [], isLoading, error } = useQuery({
     queryKey: ['products', filters],
     queryFn: () => {
       console.log('🔍 Fazendo requisição para produtos com filtros:', filters);
@@ -43,6 +43,9 @@ const ProductsPage: React.FC = () => {
     retry: 3,
     retryDelay: 1000,
   });
+
+  // Normalize products data to handle different API formats
+  const products = rawProducts.map(normalizeProduct);
 
   const { data: categories = [] } = useQuery({
     queryKey: ['categories'],
@@ -76,7 +79,7 @@ const ProductsPage: React.FC = () => {
         </Alert>
         <Alert severity="info">
           <Typography variant="body2">
-            URL da API: {process.env.REACT_APP_API_URL || 'https://ecommerce-backend-emergency-34f7b56be548.herokuapp.com/api'}
+            URL da API: {process.env.REACT_APP_API_URL || 'http://localhost:3001/api'}
           </Typography>
           <Typography variant="body2">
             Erro: {error instanceof Error ? error.message : 'Erro desconhecido'}

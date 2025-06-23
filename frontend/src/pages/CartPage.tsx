@@ -22,6 +22,7 @@ import {
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { getProductPrice } from '../utils/productUtils';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -188,7 +189,7 @@ const CartPage: React.FC = () => {
                             fontWeight: 700,
                           }}
                         >
-                          ${item.product.price.toFixed(2)} each
+                          ${getProductPrice(item.product.price).toFixed(2)} each
                         </Typography>
                       </Box>
 
@@ -266,7 +267,7 @@ const CartPage: React.FC = () => {
                             fontWeight: 700,
                           }}
                         >
-                          ${(item.product.price * item.quantity).toFixed(2)}
+                          ${(getProductPrice(item.product.price) * item.quantity).toFixed(2)}
                         </Typography>
                       </Box>
                     </Box>
