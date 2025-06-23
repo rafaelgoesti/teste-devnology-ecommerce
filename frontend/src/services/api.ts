@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // URL de produção HARD-CODED para garantir no build - SOLUÇÃO DEFINITIVA
-const PRODUCTION_API_URL = 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com/api';
+const PRODUCTION_API_URL = 'https://ecommerce-backend-emergency-34f7b56be548.herokuapp.com/api';
 
 // Garantir que sempre use a URL de produção
 const API_BASE_URL = PRODUCTION_API_URL;

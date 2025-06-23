@@ -71,13 +71,12 @@ const ProductsPage: React.FC = () => {
   if (error) {
     console.error('❌ Erro ao carregar produtos:', error);
     return (
-      <Container sx={{ py: 8 }}>
-        <Alert severity="error" sx={{ mb: 2 }}>
+      <Container sx={{ py: 8 }}>        <Alert severity="error" sx={{ mb: 2 }}>
           Falha ao carregar produtos. Verifique se o backend está funcionando.
         </Alert>
         <Alert severity="info">
           <Typography variant="body2">
-            URL da API: {process.env.REACT_APP_API_URL || 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com/api'}
+            URL da API: {process.env.REACT_APP_API_URL || 'https://ecommerce-backend-emergency-34f7b56be548.herokuapp.com/api'}
           </Typography>
           <Typography variant="body2">
             Erro: {error instanceof Error ? error.message : 'Erro desconhecido'}
