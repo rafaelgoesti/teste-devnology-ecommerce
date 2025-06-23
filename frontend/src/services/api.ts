@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-// Use environment variable or default to localhost
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+// Use environment variable or default to production API
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com/api';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
 });
 
 // Add request interceptor for logging
@@ -27,7 +31,20 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.error(`❌ API Error: ${error.config?.method?.toUpperCase()} ${error.config?.url} - ${error.response?.status}`, error.response?.data);
+    console.error(`❌ API Error:`, {
+      method: error.config?.method?.toUpperCase(),
+      url: error.config?.url,
+      status: error.response?.status,
+      data: error.response?.data,
+      message: error.message,
+      code: error.code
+    });
+    
+    // Handle network errors specifically for mobile
+    if (error.code === 'NETWORK_ERROR' || error.message === 'Network Error') {
+      console.error('🚨 Network connectivity issue detected');
+    }
+    
     return Promise.reject(error);
   }
 );
