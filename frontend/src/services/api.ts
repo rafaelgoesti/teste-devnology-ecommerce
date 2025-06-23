@@ -1,10 +1,14 @@
 import axios from 'axios';
 
-// URL fixa para produção - sem dependência de variáveis de ambiente
-const API_BASE_URL = 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com/api';
+// URL de produção HARD-CODED para garantir no build - SOLUÇÃO DEFINITIVA
+const PRODUCTION_API_URL = 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com/api';
 
-// Log para debug
-console.log('🌐 API_BASE_URL configurada para:', API_BASE_URL);
+// Garantir que sempre use a URL de produção
+const API_BASE_URL = PRODUCTION_API_URL;
+
+// Log para debug e verificação
+console.log('🌐 API_BASE_URL DEFINITIVA:', API_BASE_URL);
+console.log('🚀 URL HARD-CODED GARANTIDA:', PRODUCTION_API_URL);
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
