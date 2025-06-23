@@ -19,13 +19,14 @@ import { OrderItem } from './entities/order-item.entity';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-    }),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'ecommerce.db',
+    }),    TypeOrmModule.forRoot({
+      type: (process.env.NODE_ENV === 'production' ? 'postgres' : 'sqlite') as any,
+      url: process.env.DATABASE_URL,
+      database: process.env.NODE_ENV === 'production' ? undefined : 'ecommerce.db',
       entities: [Product, Order, OrderItem],
       synchronize: true, // Only for development
-      logging: true,
+      logging: process.env.NODE_ENV !== 'production',
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'frontend', 'build'),
