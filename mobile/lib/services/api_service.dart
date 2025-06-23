@@ -3,16 +3,15 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import '../models/models.dart';
 
-class ApiService {
-  // Configuração da URL da API
-  // Para produção, use a URL da Railway
+class ApiService {  // Configuração da URL da API
+  // Para produção, use a URL do Heroku
   // Para desenvolvimento local, use localhost ou IP local
   static String get baseUrl {
-    // URL de produção (Railway) - descomente para usar em produção
-    // const String productionUrl = 'https://seu-projeto.railway.app';
-    // return productionUrl;
-    
-    // URLs de desenvolvimento
+    // URL de produção (Heroku) - descomente para usar em produção
+    const String productionUrl = 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com';
+    return productionUrl;
+      // URLs de desenvolvimento (comentado para produção)
+    /*
     if (kIsWeb) {
       // Para Flutter Web
       return 'http://localhost:3001';
@@ -20,6 +19,7 @@ class ApiService {
       // Para dispositivos móveis - IP da sua máquina na rede local
       return 'http://192.168.1.155:3001';
     }
+    */
   }
   static Map<String, String> get _headers {
     Map<String, String> headers = {
