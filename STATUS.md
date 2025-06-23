@@ -110,33 +110,35 @@ cd mobile && flutter run
 
 ## 🚀 Próximos Passos
 
-1. **✅ Configurado para Railway** - Backend pronto para deploy
-2. **🔄 Deploy na Railway**:
-   - Acesse: https://railway.app
-   - Conecte com GitHub
-   - Selecione o repositório
-   - Escolha pasta `backend`
-   - Configure variáveis de ambiente
+1. **✅ Configurado para Heroku** - Backend pronto para deploy
+2. **🔄 Deploy no Heroku**:
+   - Instalar Heroku CLI
+   - Login: `heroku login`
+   - Criar app: `heroku create seu-app-name`
+   - Configurar PostgreSQL: `heroku addons:create heroku-postgresql:mini`
+   - Deploy: `git subtree push --prefix=backend heroku main`
 3. **🔄 Atualizar frontend** com URL da API de produção
 4. **🔄 Redeploy do frontend** no Vercel
 5. **✅ Sistema 100% na nuvem!**
 
 ## 📂 Arquivos de Deploy
 
-### **✅ Railway (Backend)**
-- `backend/railway.json` - Configuração da Railway
+### **✅ Heroku (Backend)**
 - `backend/Procfile` - Comando de inicialização
+- `backend/package.json` - Versão Node.js especificada
 - `backend/env.example` - Variáveis de ambiente
-- `RAILWAY_DEPLOY.md` - Guia completo de deploy
+- `HEROKU_DEPLOY.md` - Guia completo de deploy
+- **Custo**: ~$10/mês (Dyno + PostgreSQL)
 
 ### **✅ Vercel (Frontend)**
 - `vercel.json` - Configuração do Vercel
 - `frontend/.env.example` - Variáveis do React
 - URL configurável via `REACT_APP_API_URL`
+- **Custo**: Gratuito
 
 ### **✅ Flutter Mobile**
 - URL de produção configurável
-- Suporte para Railway em produção
+- Suporte para Heroku em produção
 
 ---
 
@@ -163,7 +165,38 @@ cd mobile && flutter run
 **🔗 URL**: https://github.com/rafaelgoesti/teste-devnology-ecommerce.git
 
 ### 📝 **Último Commit**: 
-- **Hash**: `303a1d7`
-- **Título**: "Flutter mobile"
-- **Arquivos**: 140 arquivos alterados, 7866 linhas adicionadas
-- **Status**: ✅ **Enviado com sucesso**
+- **Hash**: `cdc2852`
+- **Título**: "Configurar Heroku PostgreSQL"
+- **Funcionalidades**: Backend configurado para PostgreSQL Supabase
+- **Status**: ✅ **Pronto para deploy no Heroku**
+
+## 🚀 **Próximos Passos Imediatos:**
+
+### **1. Deploy no Heroku:**
+```bash
+# 1. Instalar Heroku CLI
+winget install Heroku.CLI
+
+# 2. Login no Heroku
+heroku login
+
+# 3. Criar app
+heroku create seu-ecommerce-backend
+
+# 4. Configurar variáveis
+heroku config:set DATABASE_URL="postgresql://postgres:Rafael#@2030@db.kixueapbpzdjlbszngnn.supabase.co:5432/postgres"
+heroku config:set NODE_ENV=production
+
+# 5. Deploy
+git subtree push --prefix=backend heroku main
+```
+
+### **2. URLs após deploy:**
+- **API**: `https://seu-app.herokuapp.com/api/products`
+- **Docs**: `https://seu-app.herokuapp.com/api/docs`
+
+### **3. Configurar frontend para produção:**
+- Criar `.env` no frontend: `REACT_APP_API_URL=https://seu-app.herokuapp.com/api`
+- Redeploy no Vercel
+
+**🎯 Sistema quase 100% na nuvem! Falta apenas fazer o deploy! 🚀**
