@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// Use environment variable or default to production API
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com/api';
+// URL fixa para produção - sem dependência de variáveis de ambiente
+const API_BASE_URL = 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com/api';
+
+// Log para debug
+console.log('🌐 API_BASE_URL configurada para:', API_BASE_URL);
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
