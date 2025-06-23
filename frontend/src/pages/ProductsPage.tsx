@@ -34,10 +34,14 @@ import { Product, ProductFilters } from '../types';
 const ProductsPage: React.FC = () => {
   const { addItem } = useCart();
   const [filters, setFilters] = useState<ProductFilters>({});
-
   const { data: products = [], isLoading, error } = useQuery({
     queryKey: ['products', filters],
-    queryFn: () => ProductsService.getProducts(filters),
+    queryFn: () => {
+      console.log('🔍 Fazendo requisição para produtos com filtros:', filters);
+      return ProductsService.getProducts(filters);
+    },
+    retry: 3,
+    retryDelay: 1000,
   });
 
   const { data: categories = [] } = useQuery({
@@ -64,11 +68,20 @@ const ProductsPage: React.FC = () => {
   const clearFilters = () => {
     setFilters({});
   };
-
   if (error) {
+    console.error('❌ Erro ao carregar produtos:', error);
     return (
-      <Container sx={{ py: 8 }}>        <Alert severity="error">
+      <Container sx={{ py: 8 }}>
+        <Alert severity="error" sx={{ mb: 2 }}>
           Falha ao carregar produtos. Verifique se o backend está funcionando.
+        </Alert>
+        <Alert severity="info">
+          <Typography variant="body2">
+            URL da API: {process.env.REACT_APP_API_URL || 'https://teste-devnology-ecommerce-2cbfc0d098c4.herokuapp.com/api'}
+          </Typography>
+          <Typography variant="body2">
+            Erro: {error instanceof Error ? error.message : 'Erro desconhecido'}
+          </Typography>
         </Alert>
       </Container>
     );

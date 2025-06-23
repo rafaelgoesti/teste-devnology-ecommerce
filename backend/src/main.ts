@@ -4,13 +4,24 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);  // Enable CORS - Allow all origins for development
+  const app = await NestFactory.create(AppModule);  // Enable CORS - Allow all origins with mobile-specific headers
   app.enableCors({
     origin: true, // Allow all origins
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+    allowedHeaders: [
+      'Content-Type', 
+      'Authorization', 
+      'Accept', 
+      'Origin', 
+      'X-Requested-With',
+      'Access-Control-Allow-Origin',
+      'Access-Control-Allow-Headers',
+      'Access-Control-Allow-Methods'
+    ],
     exposedHeaders: ['Content-Length', 'Content-Type'],
+    optionsSuccessStatus: 200, // For legacy browser support
+    preflightContinue: false
   });
 
   // Global validation pipe
